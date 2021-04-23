@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             if(databaseHelper.checkUser(mobile,password)){
 
-
-                   Intent i = new Intent(getApplicationContext(),Welcome.class);
-                   i.putExtra("MOBILE",mobile);
-                   startActivity(i);
+                Intent i= new Intent(MainActivity.this,Welcome.class);
+                i.putExtra("mobile",mobile);
+                startActivity(i);
+                cleanFields();
                }
                else{
                    Toast.makeText(getApplicationContext(),"Password and Mobile does not match",Toast.LENGTH_LONG).show();
@@ -70,5 +70,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+    }
+    private void cleanFields(){
+        mobileLogin.setText(null);
+        passwordLogin.setText(null);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 }

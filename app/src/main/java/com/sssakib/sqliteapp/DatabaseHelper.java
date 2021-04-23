@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "User.bd";
@@ -98,6 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean checkUser(String mobile, String password){
+
         String[] columns = {
                 ID
         };
@@ -121,6 +124,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public ArrayList<String> getUser(String mobile){
+        ArrayList<String> list =new ArrayList<String>();
+
+        String[] columns = {
+                NAME,
+                MOBILE,
+                EMAIL,
+                ADDRESS,
+                PASSWORD
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = MOBILE + " = ?";
+        String[] selectionArgs = { mobile };
+
+        Cursor cursor = db.query(TABLE_NAME,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        while (cursor.moveToNext()) {
+            list.add(cursor.getString(0));
+            list.add(cursor.getString(1));
+            list.add(cursor.getString(2));
+            list.add(cursor.getString(3));
+
+
+
+        }
+        cursor.close();
+        db.close();
+
+        return list;
+
+
+    }
+
 
 
 }
