@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         String mobile = mobileLogin.getText().toString().trim();
         String password = passwordLogin.getText().toString().trim();
-        String m = mobile;
 
 
         if(v.getId()==R.id.logInButton){
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                    Intent i = new Intent(getApplicationContext(),Welcome.class);
-                   i.putExtra("MOBILE",m);
+                   i.putExtra("MOBILE",mobile);
                    startActivity(i);
                }
                else{
